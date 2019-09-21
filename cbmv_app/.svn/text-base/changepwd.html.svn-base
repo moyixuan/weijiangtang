@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/changepwd.css" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/cbmv.js"></script>
+		<script type="text/javascript" src="js/changepwd.js"></script>
+
+		<script type="text/javascript">
+			$(function(){
+				$("#user").on("click",function(){
+					location.href='User.html'
+				})
+			})
+		</script>
+
+	</head>
+
+	<body>
+		<!--头部导航begin-->
+		<div class="container">
+
+			<ul class="nav">
+				<li class="nav-item back">
+					<a class="nav-link" href="User.html">
+						<span class="glyphicon glyphicon-menu-left back" aria-hidden="true" id="user"></span>
+					</a>
+				</li>
+				<li class="nav-item change">
+					<span>修改密码</span>
+				</li>
+			</ul>
+		</div>
+		<!--头部导航end-->
+
+		<div class="nr">
+			<form>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">手机号:</span>
+					</div>
+					<input type="text" class="form-control remobile" placeholder="手机号" name="custMobile" >
+				</div>
+				
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">密码:</span>
+					</div>
+					<input type="password" class="form-control pwd" placeholder="任意组合的数字" name="custPwd" >
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">确认密码:</span>
+					</div>
+					<input type="password"  class="form-control repwd" placeholder="任意组合的数字"  name="custrepwd">
+				</div>
+			</form>
+			<a   href="#" class="btn btn-danger pwdsubmit">提交</a>
+		</div>
+	</body>
+
+</html>

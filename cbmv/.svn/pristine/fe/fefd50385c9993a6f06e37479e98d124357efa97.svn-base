@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+.notnull{
+	color:red;
+}
+
+
+.hint{
+	position: absolute;
+	left: 350px;
+	background-color: white;
+	top: 0;
+	height: 100%;
+	line-height: 30px;
+	border-radius: 5px;
+	min-width:70px;
+	border: 1px solid #cccccc;
+	padding-left: 5px;
+	padding-right: 5px;
+	white-space:nowrap;
+	display:none;
+}
+
+.hint:before {
+	content: '';
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #cccccc;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin-top: -10px;
+   
+}
+.hint:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 9px solid transparent;
+    border-right-color: #FFFFFF;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin-top: -9px;
+}
+.pageNum{
+	color: red !important;
+}

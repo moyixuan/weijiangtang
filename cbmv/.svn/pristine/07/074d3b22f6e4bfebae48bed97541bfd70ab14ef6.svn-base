@@ -1,0 +1,217 @@
+package com.creatorbluer.cbmv.controller;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.creatorbluer.cbmv.comm.Result;
+import com.creatorbluer.cbmv.domain.Cust;
+import com.creatorbluer.cbmv.service.CustService;
+       
+@RestController
+@RequestMapping("/front")
+public class CustAjaxController {
+	
+	
+	@Autowired
+	private CustService cs;
+	
+	@RequestMapping("/regist")
+	private String regist( @RequestParam("file")MultipartFile file,Cust c,HttpSession session,HttpServletRequest request) throws IllegalStateException, IOException {
+		//防重复提交的
+		/*
+		 * String token = null; synchronized (cs) { token = (String)
+		 * session.getAttribute("repeaToken"); session.removeAttribute("repeaToken"); }
+		 */
+		//判断手机号有没有被注册
+		int count = 0;
+		int zc = 0;
+		Result r= Result.Ok();
+		try {
+			count = cs.selectByMobile(c.getCustMobile());
+			if(count > 0) {
+				System.out.println("++++++++++++++++++++++"+file);
+				r= r.ERROR();
+				r.setMsg("手机号码以注册！");
+			}else {
+				 File destFile = null;
+				 
+				if(!file.isEmpty()) {
+					//上传处理
+					// 根据时间戳创建新的文件名，这样即便是第二次上传相同名称的文件，也不会把第一次的文件覆盖了
+					String fileName = System.currentTimeMillis()+file.getOriginalFilename();
+					//日期格式
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					//创建日期对象
+					Date date = new Date();
+					//通过获取当前项目的真实路径，然后拼接前面的文件名
+					 String destFileName="D:\\cbitedu5\\upload"+File.separatorChar + sdf.format(date)+File.separatorChar+fileName;
+					 //第一次运行的时候，这个文件所在的目录往往是不存在的，这里需要创建一下目录
+					  destFile = new File(destFileName);
+					 if (!destFile.getParentFile().exists()) {
+						 	destFile.getParentFile().mkdirs();
+			            }
+					 //把浏览器上传的文件复制到希望的位置
+		             file.transferTo(destFile);
+		             c.setCustImg("/upload/"+ sdf.format(date) +"/"+fileName);
+				}else {
+					c.setCustImg("/upload/timg.jpg");
+				}
+				
+				zc = cs.insertByCust(c);
+				if(zc == 0) {
+					//注册失败就删除他
+					destFile.delete();
+					r = Result.ERROR();
+					r.setMsg("注册失败");
+				}else {
+					r.setMsg("注册成功");
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return r.toString();
+		
+	}
+	//登录
+	@RequestMapping("/frontlogin")
+	public String query(Cust c )throws SQLException {
+		Result  r=Result.Ok();
+		Cust cc=new  Cust();
+		 cc =cs.selectCust(c);
+		if(cc!=null) {
+		       r.setData(cc); 
+		       r.setMsg("登录成功");
+		}else {
+			// TODO Auto-generated catch block
+			r= Result.ERROR();
+	    r.setMsg("登录失败");
+        
+		}
+		return r.toString();
+	}
+
+	
+	//修改
+	@RequestMapping("/update")
+	public String updatecust(Cust c, @RequestParam("file")MultipartFile file)throws SQLException {
+		Result  r=Result.Ok();
+		int a = cs.selectMobileChongfu(c);
+		if(a>0) {
+			r = Result.ERROR();
+			r.setMsg("手机号已存在");
+		}else {
+			int count=0;
+			if(!file.isEmpty()) {
+				//上传处理
+				// 根据时间戳创建新的文件名，这样即便是第二次上传相同名称的文件，也不会把第一次的文件覆盖了
+				String fileName = System.currentTimeMillis()+file.getOriginalFilename();
+				//日期格式
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				//创建日期对象
+				Date date = new Date();
+				//通过获取当前项目的真实路径，然后拼接前面的文件名
+				 String destFileName="D:\\cbitedu5\\upload"+File.separatorChar + sdf.format(date)+File.separatorChar+fileName;
+				 //第一次运行的时候，这个文件所在的目录往往是不存在的，这里需要创建一下目录
+				  File destFile = new File(destFileName);
+				 if (!destFile.getParentFile().exists()) {
+					 	destFile.getParentFile().mkdirs();
+		            }
+				 //把浏览器上传的文件复制到希望的位置
+	             try {
+					file.transferTo(destFile);
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	             c.setCustImg("/upload/"+ sdf.format(date) +"/"+fileName);
+			}
+			
+			count=cs.update(c);
+			if(count>0) {
+				  r.setData(count);   
+			       r.setMsg("修改成功");
+			}else{
+				// TODO Auto-generated catch block
+			       r=Result.ERROR();
+				r.setMsg("修改失败");
+			}
+		}
+		return r.toString();		
+	}
+	
+	
+	//用户详情
+	@RequestMapping("/querycust")
+	 public String query(Integer custId) {
+		Result  r=Result.Ok();
+		Cust cc=new Cust();
+	        cc=cs.query(custId);
+		if(cc!=null) {
+			 JSONObject json=new JSONObject();
+			 json.put("token", cc);
+			  r.setData(cc);   
+		       r.Ok();
+		       r.setMsg("成功");
+		}else{
+			// TODO Auto-generated catch block
+		       r=Result.ERROR();
+			r.setMsg("失败");
+		}
+		return r.toString();
+
+	}
+
+	
+
+	//忘记密码
+	@RequestMapping("/forgetpwd")
+	public String foegrtpwd(Cust c) throws SQLException{
+		String pwd = c.getCustPwd();
+		c.setCustPwd(null);
+		Cust cust = cs.selectCust(c);
+		Result r = Result.Ok();
+		if(cust == null) {
+			r= Result.ERROR();
+			r.setMsg("此用户不存在");
+		}else {
+			cust.setCustPwd(pwd);
+			cust.setCustMobile(null);
+			int count = cs.update(cust);
+			if(count > 0) {
+				r.setMsg("成功");
+			}else {
+				r=Result.ERROR();
+				r.setMsg("失败");
+			}
+		}
+		return r.toString();
+		
+	}
+	
+	
+	
+	
+}

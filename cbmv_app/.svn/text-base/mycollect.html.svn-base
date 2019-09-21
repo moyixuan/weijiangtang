@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/mycollect.css" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/cbmv.js" ></script>
+		<script type="text/javascript" src="js/mycollect.js" ></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#user").on("click",function(){
+					location.href='User.html'
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<!--头部导航栏begin-->
+		<div class="container bg nav">
+			<ul class="nav tx">
+				<li class="nav-item">
+					<a class="nav-link" href="User.html">
+						<span class="glyphicon glyphicon-menu-left back" aria-hidden="true" id="user"></span></a>
+				</li>
+				<li class="nav-item ">
+					<span class="titou" href="#">我的收藏</span>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link " href="#">
+						<span class="glyphicon glyphicon-trash back"  id="delete" aria-hidden="true"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--头部导航栏end-->
+
+		<!--收藏列表begin-->
+		<table class="table  table-hover">
+			<tbody class="clist">
+				<!--<tr>
+					
+					<td>
+						<img class="img" src="img/课程图片.jpg" />
+					</td>
+					
+					<td>
+						<div class="jianjie">
+							<span>CSS</span>
+							<span>HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</span>
+						</div>
+					</td>
+					<td class="check">
+						<input type="checkbox" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="img/课程图片.jpg" />
+					</td>
+					<td>
+						<div class="jianjie">
+							<span>CSS</span>
+							<span>HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</span>
+						</div>
+					</td>
+					<td class="check">
+						<input type="checkbox" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="img/课程图片.jpg" />
+					</td>
+					<td>
+						<div class="jianjie">
+							<span>CSS</span>
+							<span>HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</span>
+						</div>
+					</td>
+					<td class="check">
+						<input type="checkbox" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="img/课程图片.jpg" />
+					</td>
+					<td>
+						<div class="jianjie">
+							<span>CSS</span>
+							<span>HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</span>
+						</div>
+					</td>
+					<td class="check">
+						<input type="checkbox" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="img/课程图片.jpg" />
+					</td>
+					<td>
+						<div class="jianjie">
+							<span>CSS</span>
+							<span>HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</span>
+						</div>
+					</td>
+					<td class="check">
+						<input type="checkbox" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="img/课程图片.jpg" />
+					</td>
+					<td>
+						<div class="jianjie">
+							<span>CSS</span>
+							<span>HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</span>
+						</div>
+					</td>
+					<td class="check">
+						<input type="checkbox" />
+					</td>
+				</tr>-->
+			
+				
+			</tbody>
+		</table>
+	</body>
+
+</html>

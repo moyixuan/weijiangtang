@@ -1,0 +1,67 @@
+package com.creatorbluer.cbmv.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.creatorbluer.cbmv.comm.Properties;
+import com.creatorbluer.cbmv.comm.Result;
+import com.creatorbluer.cbmv.domain.Cust;
+import com.creatorbluer.cbmv.domain.User;
+import com.creatorbluer.cbmv.service.CustService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+@RestController
+@RequestMapping("/front")
+public class CustController {
+	@Autowired
+	CustService custservice;
+	//登录
+	@RequestMapping("/login")
+	public String query(Cust c ) {
+		Result  r=new Result();
+		try {
+			List<Cust> list = custservice.selectByCusts(c);
+			 JSONObject json=new JSONObject();
+			    json.put("token", list);
+			    r.setData(json);
+		       r.Ok();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r.setMsg("登录失败");
+			r.ERROR();
+			e.printStackTrace();
+		}
+		return r.toString();
+	}
+	
+	
+//修改
+	@RequestMapping("/update")
+	public String update(Cust c ) {
+		Result  r=new Result();
+		try {
+			List<Cust> list = custservice.selectByCusts(c);
+			 JSONObject json=new JSONObject();
+			    json.put("token", list);
+			    r.setData(json);
+		       r.Ok();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r.setMsg("登录失败");
+			r.ERROR();
+			e.printStackTrace();
+		}
+		return r.toString();
+	}
+
+}

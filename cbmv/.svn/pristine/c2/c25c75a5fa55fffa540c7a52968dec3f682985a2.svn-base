@@ -1,0 +1,77 @@
+package com.creatorbluer.cbmv.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.creatorbluer.cbmv.comm.Result;
+import com.creatorbluer.cbmv.domain.Cust;
+import com.creatorbluer.cbmv.service.CustService;
+
+@RestController
+@RequestMapping("/front")
+public class CustAjaxController {
+	@Autowired
+	private CustService cs;
+	
+	@RequestMapping("/regist")
+	private String regist(Cust c) {
+		
+		return null;
+		
+	}
+	
+	
+	//登录
+
+	@RequestMapping("/login")
+	public String query(Cust c ) {
+		Result  r=new Result();
+		try {
+			List<Cust> list =cs.selectCust(c);
+			 JSONObject json=new JSONObject();
+			    json.put("token", list);
+			    r.setData(json);   
+		       r.Ok();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r.setMsg("登录失败");
+			r.ERROR();
+			e.printStackTrace();
+		}
+		return r.toString();
+	}
+	
+	
+	//修改
+	@RequestMapping("/update")
+	public String updatecust(Cust c) {
+		Result  r=new Result();
+		try {
+			int count=0;
+			count=cs.update(c);
+			   r.setData(count);   
+		       r.Ok();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r.setMsg("修改失败");
+			r.ERROR();
+			e.printStackTrace();
+		}
+		
+		return r.toString();	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}

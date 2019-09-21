@@ -1,0 +1,52 @@
+package com.creatorbluer.cbmv.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.creatorbluer.cbmv.domain.Cust;
+import com.creatorbluer.cbmv.mapper.CustMapper;
+
+@Service
+public class CustService {
+	@Autowired
+	CustMapper custMapper;
+	
+	/**
+	 * 查询
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Cust> selectByCusts(Cust c)throws SQLException{
+		List<Cust> list = custMapper.selectByCusts(c);
+		return list;
+	}
+	public List<Cust> selectByCust(Cust c)throws SQLException{
+		List<Cust> list = custMapper.selectByCusts(c);
+		return list;
+	}
+
+	
+	/**
+	 * 客户端注册
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
+	public int insertByCust(Cust c)throws SQLException{
+		return custMapper.insertByCust(c);
+	}
+	
+	/**
+	 * 根据手机号查询
+	 * @param mobile
+	 * @return
+	 * @throws SQLException
+	 */
+	public int selectByMobile(String mobile) throws SQLException{
+		return custMapper.selectByMobile(mobile);
+	}
+}

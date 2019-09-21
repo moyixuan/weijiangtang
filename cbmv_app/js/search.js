@@ -1,0 +1,53 @@
+$(function(){
+	
+	$.post(ctx+"/hot",function(res){
+  		let data = res.data;
+	 	let list = data;
+  		let hotvideo=$(".searchtype").empty();
+  		list.forEach(function(val){
+  			let tr=$('<span class="rounded border">'+val.videoName+'</span>').appendTo(hotvideo);
+  			tr.on("click",function(){	
+  			location.href="cbmv_video.html?videoId="+$(this).find("span").data("videoid")	
+  			})
+  			
+  		})
+  	})
+	
+	
+	
+	
+	$(".opensearch").on("click",function(){
+		var searchvalue=$(".search").val();
+		$.post(ctx+"/search","videoName="+searchvalue,function(res){
+			let  data=res.data;
+			let list=data.vidoenamesearch;
+			let  searchvideo=$(".videodomo").empty();
+			console.log(list)
+			list.forEach(function(val){
+				let tr=$('<div class="container-fluid video">\
+		        <a href="#" class="thumbnail">\
+		            <img src="img/tu.jpg"alt="通用的占位符缩略图"class="searchimg" data-videoid="'+val.videoId+'">\
+		        </a>\
+		        <div class="caption">\
+		        	<dt>视频名称:<span>'+val.videoName+'</span></dt>\
+		            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">'+val.playNum+'</span>\
+		            </dd>\
+		    </div>\
+		    </div>').appendTo(searchvideo);
+			});
+		 $(".searchimg").on("click",function(){
+		    	var cust = localStorage.getItem("cust");
+		    	if (cust != null) {
+					location.href="cbmv_video.html?videoId="+$(this).data("videoid");
+				}else{
+					if (confirm("请您先登录")) {
+						location.href="login.html";
+					}
+				}
+		    		
+		    });
+		});
+	
+	});
+
+});

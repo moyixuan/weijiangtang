@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/font.css" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/cbmv.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+         <script type="text/javascript">
+         	$(function(){
+         		var gouser=$(".gouser");
+         		var gosearch=$(".gosearch");
+         		var gosort=$(".gosort");
+         		var indeximg=$(".indeximg");
+         		gouser.click(function(){
+         			window.location.href="User.html";
+         			
+
+         		})
+         		gosearch.click(function(){
+         			window.location.href="search.html";
+         			
+         		})
+         		gosort.click(function(){
+         			window.location.href="sort.html";
+         		})
+         		indeximg.click(function(){
+         			window.location.href="cbmv_video.html";
+         		})
+         		
+         		
+         		
+         		
+         		
+         	})
+         </script>
+
+
+
+
+		<style>
+		li{
+			list-style: none;
+		}
+		.nav{
+					display: flex;        
+				justify-content:space-between; 
+				width: 100%; 
+		}
+		ul{
+			padding: 0;
+	}
+	.form-control{
+		border-top-right-radius: 50px; 
+		border-top-left-radius: 50px; 
+		border-bottom-right-radius:50px;
+		border-bottom-left-radius:50px;
+	}
+	.videodomo{
+		position: absolute;
+		top:295px;
+	}
+	img{
+		width: 100%;
+		height: 200px;
+	}
+	.video{
+		padding-left:0px;
+		padding-right:0px;
+		
+	}
+	.caption dt{
+		font-size: 14px;
+	}
+	.caption dd{
+		
+	}
+	.caption dt span{
+		
+	}
+	.caption dd span{
+		
+	}
+	
+		</style>
+	</head>
+	<body>
+		<!--头部-->
+<div class="container" style="background-color:#E51C23; height:45px ;">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#"><span class="glyphicon glyphicon-user gouser" aria-hidden="true" style="color: white;"></span></a>
+    </li>
+    <li class="nav-item">
+ <a class="nav-link" href="#" style="height:40px;">
+<form>
+  <div class="input-group mb-3 input-group-sm  gosearch" style="width: 180px;">
+    <input type="button" class="form-control">
+  </div>
+</form>
+</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  gosort" href="sort.html" style="color: white;">分类</a>
+    </li>
+  </ul>
+
+		
+</div>
+<!--轮播-->
+<div id="demo" class="carousel slide" data-ride="carousel"  data-interval="2000"><!--data-interval="1000" 一秒跳一次-->
+ 
+  <!-- 指示符 -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+ 
+  <!-- 轮播图片 -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+    </div>
+  </div>
+ 
+  <!-- 左右切换按钮 -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+ 
+</div>
+
+
+
+
+
+	
+<!--视频模块-->
+<div  class="videodomo">
+	<div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                 class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>javaweb</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">1000</span></dd>
+        </div>
+    </div>
+    <div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>java基础教程</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">400</span></dd>
+        </div>
+    </div>
+    <div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>MySQL入门</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">532</span></dd>
+        </div>
+    </div>
+    <div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>HTML页面编程</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">530</span></dd>
+        </div>
+    </div>
+     <div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>JavaScript</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">700</span></dd>
+        </div>
+    </div>
+     <div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>数据结构</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">120</span></dd>
+        </div>
+    </div>
+     <div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>Android编程</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">300</span></dd>
+        </div>
+    </div>
+</div>
+
+<!--热门推荐-->
+<div style="background-color: azure;">
+  <h1 style="font-size: 20px;">热门推荐||为您精选的教学视频，学到才是赚到。</h1>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</body>
+	
+</html>

@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="${ctx }/toindex">创蓝微讲堂</a>
+    </div>
+    <div>
+        <ul class="nav navbar-nav main-menu">
+            <li><a href="${ctx }/user_query" >后台用户</a></li>
+            <li><a href="${ctx }/cust_query"  >客户管理</a></li>
+			<li><a href="${ctx }/type_query"  data-url="subjlist.html">技术分类</a></li>
+			<li><a href="${ctx }/video_query"  data-url="videolist.html">视频管理</a></li>
+            <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    ${loginUser.name }
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)"  data-url="userinfo.html">用户信息</a></li>
+                    <li><a href="javascript:void(0)"  data-url="updatepwd.html">修改密码</a></li>
+                    <li class="divider"></li>
+                    <li><a href="${ctx }/loginout" class="cb-btn-out">注销</a></li> 
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>

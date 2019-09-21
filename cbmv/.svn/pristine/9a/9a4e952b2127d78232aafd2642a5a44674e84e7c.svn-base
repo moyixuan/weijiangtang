@@ -1,0 +1,78 @@
+package com.creatorbluer.cbmv.domain;
+
+import java.io.Serializable;
+
+public class Collect implements Serializable {
+    private Integer collectId;
+
+    private Integer custId;
+
+    private Integer videoId;
+
+    private static final long serialVersionUID = 1L;
+
+    public Integer getCollectId() {
+        return collectId;
+    }
+
+    public void setCollectId(Integer collectId) {
+        this.collectId = collectId;
+    }
+
+    public Integer getCustId() {
+        return custId;
+    }
+
+    public void setCustId(Integer custId) {
+        this.custId = custId;
+    }
+
+    public Integer getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(Integer videoId) {
+        this.videoId = videoId;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Collect other = (Collect) that;
+        return (this.getCollectId() == null ? other.getCollectId() == null : this.getCollectId().equals(other.getCollectId()))
+            && (this.getCustId() == null ? other.getCustId() == null : this.getCustId().equals(other.getCustId()))
+            && (this.getVideoId() == null ? other.getVideoId() == null : this.getVideoId().equals(other.getVideoId()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getCollectId() == null) ? 0 : getCollectId().hashCode());
+        result = prime * result + ((getCustId() == null) ? 0 : getCustId().hashCode());
+        result = prime * result + ((getVideoId() == null) ? 0 : getVideoId().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", collectId=").append(collectId);
+        sb.append(", custId=").append(custId);
+        sb.append(", videoId=").append(videoId);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}

@@ -1,0 +1,169 @@
+package com.creatorbluer.cbmv.comm;
+
+import java.nio.charset.Charset;
+import java.util.List;
+
+import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
+
+
+
+@Configuration
+public class WebMvcConfig extends WebMvcConfigurationSupport {
+	@Bean
+	public HandlerInterceptor builderInterceptor() {
+		return new UserShowInterceptor();
+	}
+	//拦截器
+	
+	  @Override
+	  protected void addInterceptors(InterceptorRegistry registry) {
+	  registry.addInterceptor(builderInterceptor()).addPathPatterns("/cust_query/**")
+	  						.addPathPatterns("/toindex/**").addPathPatterns("/totime/**")
+	  						.addPathPatterns("/chagepwd_edit/**").addPathPatterns("/chage_xg/**")
+	  						.addPathPatterns("/type_query/**").addPathPatterns("/type_edit/**")
+	  						.addPathPatterns("/user_query/**").addPathPatterns("/user_edit/**")
+	  						.addPathPatterns("/video_query/**").addPathPatterns("/video_edit");//拦截的路径
+	  }
+	 
+	//注册过滤器
+	@Bean
+	public FilterRegistrationBean<Filter> registFilterRegistrationBean(){
+		FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<Filter>();
+		bean.setFilter(new XssFilter());
+		bean.addUrlPatterns("/user_save");
+		return bean;
+	}
+	
+	
+	
+	//静态资源映射
+	@Override
+	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("/html/**").addResourceLocations("classpath:/templates/html/");
+		registry.addResourceHandler("/js/**").addResourceLocations("classpath:/templates/js/");
+		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/templates/css/");
+		registry.addResourceHandler("/img/**").addResourceLocations("classpath:/templates/img/");
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:D:\\cbitedu5\\upload\\");
+	}
+	
+	@Bean
+	public InternalResourceViewResolver getViewResolver() {
+		InternalResourceViewResolver vr = new InternalResourceViewResolver("/html/",".jsp");
+		return vr;
+		
+	}
+	
+	@Autowired
+	private void setCTX(WebApplicationContext webApplicationContext) {
+		ServletContext ctx = webApplicationContext.getServletContext();
+		ctx.setAttribute("ctx", ctx.getContextPath());
+
+	}
+	
+	//配置监控
+	@Value("${sys.druid.stat.allow}")
+	private String allow;
+	@Value("${sys.druid.stat.loginUsername}")
+	private String loginUsername;
+	@Value("${sys.druid.stat.loginPassword}")
+	private String loginPassword;
+	
+	@Bean
+	public ServletRegistrationBean<StatViewServlet> registStatViewServlet(){
+		ServletRegistrationBean<StatViewServlet> sr = new ServletRegistrationBean<StatViewServlet>(new StatViewServlet(),"/druid2/*");
+		//白名单
+		sr.addInitParameter("allow", allow);
+		//登录看信息的账户
+		sr.addInitParameter("loginUsername", loginUsername);
+		//登录看信息的密码
+		sr.addInitParameter("loginPassword", loginPassword);
+		//是否能够重置数据
+		sr.addInitParameter("resetEnable", "false");
+		return sr;
+	}
+	
+	//druid数据源过滤
+	public FilterRegistrationBean<WebStatFilter> druidStatFilter2(){
+		FilterRegistrationBean<WebStatFilter> fr= new FilterRegistrationBean<WebStatFilter>(new WebStatFilter());
+		//添加过滤规则
+		fr.addUrlPatterns("/*");
+		//添加不需要忽略的格式信息
+		fr.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid2/*");
+		return fr;
+		
+	}
+	
+	//Shiro
+	/*
+	 * @Bean public AuthorRealm regisAuthorRealm() { return new AuthorRealm(); }
+	 */
+	/*
+	 * @Bean
+	 * 
+	 * @Autowired public org.apache.shiro.mgt.SecurityManager registSecurityManager
+	 * (AuthorRealm realm) { DefaultWebSecurityManager sm = new
+	 * DefaultWebSecurityManager(); sm.setRealm(realm); return sm; }
+	 */
+	
+	//spring boot跨域访问，允许其他服务访问当前服务内容
+	 private CorsConfiguration buildConfig() {  
+	        CorsConfiguration corsConfiguration = new CorsConfiguration();  
+	        corsConfiguration.addAllowedOrigin("*"); // 1允许任何域名使用
+	        corsConfiguration.addAllowedHeader("*"); // 2允许任何头
+	        corsConfiguration.addAllowedMethod("*"); // 3允许任何方法（post、get等） 
+	        return corsConfiguration;  
+	    }  
+	  
+	/*
+	 * @Bean public CorsFilter corsFilter() { UrlBasedCorsConfigurationSource source
+	 * = new UrlBasedCorsConfigurationSource();
+	 * source.registerCorsConfiguration("/**", buildConfig()); // 4 return new
+	 * CorsFilter(source); }
+	 */
+
+	  //注册跨域访问过滤器
+	    @Bean
+		public FilterRegistrationBean<Filter> registFilterCorsFilter(){
+			FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<Filter>();
+			bean.setFilter(new CorsFilter());
+			bean.addUrlPatterns("/front/*");
+			return bean;
+		}
+	    
+	    //解决ajax访问乱码问题
+	    @Bean
+		public HttpMessageConverter<String> responseBodyConverter(){
+			StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+			return converter;
+		}
+	    
+	    //当前配置的重写
+	    @Override
+	    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+	    super.configureMessageConverters(converters);
+
+	    converters.add(responseBodyConverter());
+	    }
+	    
+	
+}

@@ -1,0 +1,9 @@
+$(function() {
+	//下拉框改变事件
+	$(".time").on("change",function(){
+		document.querySelector("form").submit();
+	});
+})
+
+
+

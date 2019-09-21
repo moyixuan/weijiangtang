@@ -1,0 +1,38 @@
+package com.creatorbluer.cbmv.mapper;
+
+import java.util.List;
+
+import com.creatorbluer.cbmv.domain.Collect;
+
+public interface CollectMapper {
+ 
+	/**
+	 * 新增
+	 * @param c
+	 * @return
+	 */
+	int seav(Collect c);
+	
+	/**
+	 * 删除
+	 * @param collectId
+	 * @return
+	 */
+	int delete(Integer[] collectId);
+	
+	/**
+	 * 查询所有
+	 * @param c
+	 * @return
+	 */
+	List<Collect> selectByAll(Collect c);
+	
+	/**
+	 * 根据id查询
+	 * @param collectId
+	 * @return
+	 */
+	Collect selectById(int collectId);
+	
+	
+}

@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+    	<div class="row form-group-sm"><span class="col-sm-1">周期</span>
+    		<div class="col-sm-3">
+	    		<select class="form-control">
+	    			<option>小时</option>
+	    			<option>日</option>
+	    			<option>周</option>
+	    			<option>月</option>
+	    		</select>
+    		</div>
+    	</div>
+		<div class="col-sm-3">
+			<dl>
+				<dt>50</dt>
+				<dd>注册人数</dd>
+			</dl>
+		</div>
+		<div class="col-sm-3">
+			<dl>
+				<dt>50</dt>
+				<dd>在线人数</dd>
+			</dl>
+		</div>
+		<div class="col-sm-3">
+			<dl>
+				<dt>50</dt>
+				<dd>播放数</dd>
+			</dl>
+		</div>
+		<div class="col-sm-3">
+			<dl>
+				<dt>50</dt>
+				<dd>点赞数</dd>
+			</dl>
+		</div>
+	</div>
+</div>

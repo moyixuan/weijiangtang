@@ -1,0 +1,40 @@
+$(function(){
+	$(".pwdsubmit").on("click",function(){
+		/*var this.params.custMobile=$("#mobile").val();
+		var this.params.custPwd=$("#pwd").val();*/
+		var params=$("form").serialize();
+		let  custPwd=params.custPwd;
+		let custrepwd=params.custrepwd;
+		let cust=localStorage.getItem("cust");
+		if(cust){
+			if(custPwd==custrepwd){
+		cust=JSON.parse(cust);	
+		let custid=cust.custId;
+		params=Params+"&custId="+custid;
+			$.ajax({
+			type:"post",
+			url:ctx+"/update",
+			data:params,
+			dataType:"json",
+			success:function(res){//回调函数
+				if(res.state==0){
+			/*sessionStorage.setItem("userToken",res.data.token); */   //客户端会话缓存，浏览器关闭就没了
+				location.href = "changepwd.html";
+			alert(res.msg);	
+				}else{
+					alert(res.msg);	
+				}
+				
+			}
+		});
+		}
+		}
+		
+		
+
+	})
+
+})
+
+
+

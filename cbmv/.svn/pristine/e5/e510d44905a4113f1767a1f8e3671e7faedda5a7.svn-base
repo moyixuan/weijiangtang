@@ -1,0 +1,36 @@
+package com.creatorbluer.cbmv.comm;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+//跨域访问过滤器
+public class CorsFilter implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest req= (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;  
+	 	//res.setHeader("Access-Control-Allow-Origin", "*");  
+	 	res.setHeader("Access-Control-Allow-Methods", "*");  
+	 	//res.setHeader("Access-Control-Max-Age", "3600");  
+	 	res.setHeader("Access-Control-Allow-Headers", "*");  
+	 	//跨域访问的关键点
+	 	res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");
+	 	//是否支持cookie跨域
+	 	res.setHeader("Access-Control-Allow-Credentials","true"); 
+	 	
+        //System.out.println("*********************************过滤器被使用**************************");  
+        chain.doFilter(request, res);
+
+		
+	}
+
+}

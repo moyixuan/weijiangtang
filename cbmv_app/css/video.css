@@ -1,0 +1,118 @@
+.dh {
+				height: 45px;
+				color: white;
+				position: absolute;
+				z-index: 99;
+				display: none;
+			}
+			
+			a,
+			a:hover {
+				color: inherit;
+			}
+			
+			.video {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+			}
+			
+			.vdiv {
+				padding-left: 0;
+				padding-right: 0;
+				z-index: 1;
+			}
+			
+
+			.list-group-item {
+				border: 0;
+				background-color: inherit;
+				font-size: 18px;
+				font-weight: bolder;
+				height: 40px;
+			}
+			
+			.teacher {
+				text-align: right;
+				font-size: 16px;
+				font-weight: 100;
+			}
+			
+			.fx {
+				display: flex;
+				justify-content: space-between;
+				margin: auto 0;
+			}
+			
+			.sifx {
+				margin: 5px 0;
+			}
+			.zhfs{
+				height: 30px;
+				display: flex;
+				align-items: flex-end;
+    			vertical-align:bottom;
+    			
+			}
+			.zp{
+				font-size: 18px;
+				font-weight: bolder;
+			}
+			.fs{
+				margin-left: 10px;
+				color: red;
+			}
+			.bhh .border{
+				padding: 4px 10px;
+				display: inline-block;
+				margin: 5px 5px;
+				background-color: white;
+			}
+			.bhh{
+				width: 100%;
+				 white-space:nowrap;
+				overflow-x: scroll;
+                overflow-y: hidden;
+			}
+			.tx{
+				width: 30px;
+				height: 30px;
+				border-radius: 15px;
+				background-image: url(../img/课程图片.jpg);
+				
+				background-size:cover;
+			}
+			
+			.mctx li:first-child{
+				margin: auto 0;
+				margin-right: 10px;
+			}
+			.mctx li{
+				margin-right: 10px;
+			}
+			.mctx{
+				height: 40px;
+				line-height: 40px;
+				font-size: 14px;
+			}
+			.mctx li:last-child{
+				color: red;
+			}
+			.weben{
+				height: 52px;
+				width: 90%;
+				color: #ccc;
+				word-wrap: break-word;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+				float: right;
+			} 
+			.dp{
+				height: 100px;
+				margin-top: 5px;
+				
+			}
+			

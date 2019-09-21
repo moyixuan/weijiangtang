@@ -1,0 +1,41 @@
+package com.creatorbluer.cbmv.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.creatorbluer.cbmv.domain.Like;
+import com.creatorbluer.cbmv.mapper.LikeMapper;
+
+@Service
+public class LikeService {
+	@Autowired
+	LikeMapper mapper;
+	
+
+	/**
+	 * 点赞判断
+	 * @param l
+	 * @return
+	 */
+	public Integer selectByLike(Like l) {
+		return mapper.selectByLike(l);
+	}
+	
+	/**
+	 * 新增
+	 * @param l
+	 * @return
+	 */
+	public Integer seavByLike(Like l) {
+		return mapper.seavByLike(l);
+	}
+	
+	/**
+	 * 删除
+	 * @param likeId
+	 * @return
+	 */
+	public int delete(Like l) {
+		return mapper.delete(l);
+	}
+}

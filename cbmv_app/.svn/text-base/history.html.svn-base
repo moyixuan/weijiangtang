@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/cbmv.js" ></script>
+		<script type="text/javascript" src="js/history.js" ></script>
+		<style>
+			a{
+				color: #000;
+				text-decoration: none;
+			}
+			.acc{
+				padding-top: 20px;
+			}
+			.head{
+				background-color: #e51c23;
+				width: 100%;
+				height: 45px;
+				text-align: center;
+				color: white;
+				line-height: 45px;
+			}
+			.head a{
+				color: inherit;
+			}
+			.head-txt{
+				font-size: 18px;
+			line-height: 45px;
+			}
+			.head-sp{
+				font-size: 18px;
+				line-height: 45px;
+				float:left;
+			}
+			.his-nav{
+				margin-top: 25px;
+				height: 100px;
+				border: 1px solid #999;
+				display: flex;
+				justify-content: space-between;
+			}
+			.nav-img{
+				width: 120px;
+				height: 90px;
+				margin-top: 4px;
+				margin-right: 5px;
+			}
+			.nav-txt{
+				padding-top: 5px;
+				font-size: 14px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			.nav-txt p:first-child{
+				font-size: 18px;
+				
+				width: 140px;
+				margin-bottom: 5px;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+			.nav-txt p:last-child{
+				
+				width: 140px;
+				height: 45px;
+				margin-bottom: 5px;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+			}
+			.nav-href{
+				width: 70px;
+				height: 100px;
+				margin-left: 5px;
+			}
+			.nav-a{
+				font-size: 14px;
+				line-height: 100px;
+				height: px;
+				width: px;
+				background-color:  #e51c23;
+				border-radius: 25px;
+			}
+			.xz{
+				line-height: 100px;
+			}
+			.sc{
+				float: right;
+				
+			}
+		</style>
+	</head>
+	<body>
+	<!--头部标题-->
+		<div class="container-fluid head">
+			<a href="User.html">
+				<span class="glyphicon glyphicon-menu-left head-sp" id="user"></span>
+			</a>
+			<span class="head-txt">观看历史</span>
+			<a href="#" class="sc">
+						<span class="glyphicon glyphicon-trash back"  id="delete" aria-hidden="true"></span>
+			</a>
+		</div>
+	<div class="history">
+	<!--观看历史缩略-->
+		<!--<div class="container-fluid his-nav">
+			<div><img src="img/课程图片.jpg" class="nav-img"/></div>
+			<div class="nav-txt">
+				<p>CSS网站布局</p>
+				<p>文本文本文本文本</p>
+			</div>
+			<div class="nav-href"><a href="#" class="nav-a">继续观看</a></div>
+			<div class="xz">
+				<input type="checkbox">
+			</div>
+			
+		</div>-->
+	
+	
+	<!--观看历史缩略-->
+		<!--<div class="container-fluid his-nav">
+			<div><img src="img/课程图片.jpg" class="nav-img"/></div>
+			<div class="nav-txt">
+				<p>CSS网站布局</p>
+				<p>文本文本文本文本</p>
+			</div>
+			<div class="nav-href"><a href="#" class="nav-a">继续观看</a></div>
+			<div class="xz">
+				<input type="checkbox">
+			</div>
+			
+		</div>-->
+	
+	
+	<!--观看历史缩略-->
+		<!--<div class="container-fluid his-nav">
+			<div><img src="img/课程图片.jpg" class="nav-img"/></div>
+			<div class="nav-txt">
+				<p>CSS网站布局</p>
+				<p>文本文本文本文本</p>
+			</div>
+			<div class="nav-href"><a href="#" class="nav-a">继续观看</a></div>
+			<div class="xz">
+				<input type="checkbox">
+			</div>
+			
+		</div>-->
+	
+	
+	<!--观看历史缩略-->
+		<!--<div class="container-fluid his-nav">
+			<div><img src="img/课程图片.jpg" class="nav-img"/></div>
+			<div class="nav-txt">
+				<p>CSS网站布局</p>
+				<p>文本文本文本文本</p>
+			</div>
+			<div class="nav-href"><a href="#" class="nav-a">继续观看</a></div>
+			<div class="xz">
+				<input type="checkbox">
+			</div>
+			
+		</div>-->
+	</div>
+	
+	
+</html>

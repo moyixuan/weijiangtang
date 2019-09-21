@@ -1,0 +1,249 @@
+package com.creatorbluer.cbmv.controller;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.subject.Subject;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.creatorbluer.cbmv.comm.Properties;
+import com.creatorbluer.cbmv.comm.RedisUtils;
+import com.creatorbluer.cbmv.domain.User;
+import com.creatorbluer.cbmv.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+
+
+@Controller
+public class UserController {
+	@RequestMapping("/tologin")
+	public String toLogin() {
+		return "login";
+		
+	}
+	
+	@Autowired
+	UserService userservice;
+	@Autowired
+	RedisUtils ru;
+	
+	/**
+	  * 登录
+	 * @param u
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/login",method = RequestMethod.POST)
+	public ModelAndView login(User u,HttpSession session,ModelAndView mv,String captcha) {
+		Subject subject = SecurityUtils.getSubject();//当前身份信息对象
+		UsernamePasswordToken upt = new UsernamePasswordToken(u.getMobile(),
+				//其中1234567890为加密的密钥，可以整个项目使用一个，也可以每个用户使用一个
+				//但必须保证添加用户、修改密码和登录时此用户的密钥是完全相同的
+				new Sha256Hash(u.getPwd(),"1234567890").toHex());
+		
+		
+		
+		
+		
+		String Code = (String) session.getAttribute("verifyCode");
+		session.removeAttribute("verifyCode");
+		//忽略大小写比较
+		if(Code.equalsIgnoreCase(captcha)) {
+			
+			
+			//登录验证，如果有异常则登录失败，否则成功
+			try {
+				subject.login(upt);
+				mv.setViewName("redirect:toindex");//重定向,默认到controller的mapper
+			} catch (AuthenticationException e) {
+				// TODO: handle exception
+				mv.setViewName("login");//存入要去的目标页面的名字
+				mv.addObject("msg", "账号或密码错误");
+			}
+			
+			
+		}else {
+			mv.setViewName("login");//存入要去的目标页面的名字
+			mv.addObject("msg", "验证码错误");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/user_query")
+	public ModelAndView query(User u,
+			@RequestParam(value = "pageIndex",defaultValue = "1")Integer pageIndex
+			) {
+		ModelAndView mv = new ModelAndView();
+		PageHelper.startPage(pageIndex,Properties.PAGE_SIZE);
+		
+		Integer userId = (Integer) SecurityUtils.getSubject().getPrincipal();
+		String u1 = (String) ru.getCacheHash("loginUsers", userId.toString());
+		JSONObject js = new JSONObject(u1);
+		mv.addObject("loginUser", js.toMap());
+		
+		try {
+			
+			List<User> list = userservice.selectByUser(u);
+			PageInfo<User> page = new PageInfo<User>(list);
+			mv.addObject("page", page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.setViewName("umlist");
+		return mv;
+	}
+	
+	@RequestMapping("/user_del")
+	public String del(Integer[] userId,RedirectAttributes attrs) {
+		
+		try {
+			int count = userservice.delByUserIds(userId);
+			if(count > 0) {
+				attrs.addFlashAttribute("msg","删除成功");
+			}else {
+				attrs.addFlashAttribute("msg", "删除失败");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:user_query";
+		
+	}
+	
+	/**
+	 * 进入编辑页面，如果参数userId有值，则表示修改，此时根据id查询并返回用户信息
+	 * @param userId
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("/user_edit")
+	public ModelAndView edit(Integer userId,ModelAndView mv,HttpSession session) {
+		
+		Integer userId1 = (Integer) SecurityUtils.getSubject().getPrincipal();
+		String u1 = (String) ru.getCacheHash("loginUsers", userId1.toString());
+		JSONObject js = new JSONObject(u1);
+		mv.addObject("loginUser", js.toMap());
+		
+		if(userId != null) {
+			try {
+				User u = userservice.selectById(userId);
+				mv.addObject("user", u);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		//防重复提交的token
+		session.setAttribute("repeaToken", UUID.randomUUID().toString());
+		mv.setViewName("umform");
+		return mv;
+		
+	}
+	
+	/**
+	 * 根据有没有userId，判断是进行保持还是修改
+	 * @param u
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("user_save")
+	public ModelAndView save(@Validated User u,RedirectAttributes attrs,HttpSession session,String repeaToken) {
+		ModelAndView mv = new ModelAndView();
+		//防重复提交的
+		String token = null;
+		synchronized (userservice) {
+			token = (String) session.getAttribute("repeaToken");
+			session.removeAttribute("repeaToken");
+		}
+		if(token == null || !repeaToken.equalsIgnoreCase(token)) {
+			mv.setViewName("umform");
+			mv.addObject("msg","请不要重复提交");
+			//防重复提交的token
+			session.setAttribute("repeaToken", UUID.randomUUID().toString());
+			return mv;
+		}
+		
+		
+		
+		int count = 0;
+		 boolean isUpdate = false;
+		 try {
+			 if(u.getUserId() != null) {//修改
+				 count = userservice.xiugai(u);
+				 isUpdate = true;
+			 }else {
+				 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+				 try {
+					u.setTime(sdf.parse(sdf.format(new Date())));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 u.setStatus("1");
+				 u.setPwd(new Sha256Hash(u.getPwd(),"1234567890").toHex());
+				 count = userservice.seav(u);
+			 }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 if(count > 0 ) {
+			 //attrs.addAttribute("msg", isUpdate ? "修改成功" :"新增成功");//使用？在路径后添加参数
+			 attrs.addFlashAttribute("msg", isUpdate? "修改成功" :"新增成功");//保持到会话中，页面渲染完成后立即删除
+			 mv.setViewName("redirect:user_query");		
+		}else {
+			mv.addObject("msg", isUpdate ? "修改失败" :"新增失败");
+			//防重复提交的token
+			session.setAttribute("repeaToken", UUID.randomUUID().toString());
+			mv.addObject("user", u);
+			mv.setViewName("umform");
+		}
+		return mv;
+		
+	}
+	
+	//修改状态
+	@RequestMapping("user_stus")
+	public ModelAndView status(User u,RedirectAttributes attrs) {
+		ModelAndView mv = new ModelAndView();
+		int count=0;
+		 try {
+			 count = userservice.xiugai(u);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		 if(count > 0 ) {
+			 attrs.addFlashAttribute("msg","修改成功");
+			 mv.setViewName("redirect:user_query");		
+		}else {
+			mv.addObject("msg", "修改失败");
+			mv.setViewName("user_query"); 
+		}
+		return mv;
+	}
+}

@@ -1,0 +1,22 @@
+package com.creatorbluer.cbmv.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.creatorbluer.cbmv.domain.Cust;
+import com.creatorbluer.cbmv.service.CustService;
+
+@RestController
+@RequestMapping("/front")
+public class CustAjaxController {
+	@Autowired
+	private CustService cs;
+	
+	@RequestMapping("/regist")
+	private String regist(Cust c) {
+		
+		return null;
+		
+	}
+}

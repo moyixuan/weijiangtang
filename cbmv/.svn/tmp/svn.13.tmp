@@ -1,0 +1,70 @@
+package com.creatorbluer.cbmv.mapper;
+
+import java.util.List;
+
+import com.creatorbluer.cbmv.domain.Collect;
+import com.creatorbluer.cbmv.domain.Video;
+
+public interface VideoMapper {
+	/**
+	 * 查询
+	 * @param v
+	 * @return
+	 */
+	List<Video> selectByVideo(Video v);
+	
+	/**
+	 * 删除
+	 * @param id
+	 * @return
+	 */
+	int delectsByVideo(Integer[] id);
+	
+	/**
+	 * 通过id查询
+	 * @param videoId
+	 * @return
+	 */
+	List<Video> selectByVideoId(Integer[] videoId);
+	
+	/**
+	 * 新增
+	 * @param v
+	 * @return
+	 */
+	int inserByVideo(Video v);
+	
+	/**
+	  * 修改
+	 * @param v
+	 * @return
+	 */
+	int updateByVideo(Video v);
+	
+	/**
+	  * 判断视频名字是否重复
+	 * @param v
+	 * @return
+	 */
+	Integer selectChongfu(Video v);
+	/**
+	  * 首页热门查询
+	 * @param v
+	 * @return
+	 */
+	List<Video> selectindexvideo(Video v);
+	
+	/**
+	 * 查询播放数
+	 * @param v
+	 * @return
+	 */
+	int selectSumPlay(Video v);
+	
+	/**
+	 * 查询点赞数
+	 * @param v
+	 * @return
+	 */
+	int selectLikePlay(Video v);
+}

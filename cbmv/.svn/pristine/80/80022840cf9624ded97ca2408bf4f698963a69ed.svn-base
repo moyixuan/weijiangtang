@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--其中mapper元素的namespace属性值为接口的全称。  -->
+<mapper namespace="com.creatorbluer.cbmv.mapper.CustMapper">
+	<!-- 数据库表中字段与实体的属性的映射关系 -->
+	<resultMap type="Cust" id="CustMap">
+		<!--主键  -->
+		<id column="cust_id" property="custId"/>
+		<!--非主键字段  -->
+		<result column="cust_name" property="custName"/>
+		<result column="cust_mobile" property="custMobile"/>
+		<result column="cust_nichen" property="custNichen"/>
+		<result column="cust_img" property="custImg"/>
+		<result column="cust_pwd" property="custPwd"/>
+	</resultMap>
+	
+
+	<!-- 根据手机号、姓名、昵称查询，没有条件就查询所有 -->
+	<select id="selectByCust" resultMap="CustMap" parameterType="Cust">
+		select cust_id,cust_name,cust_mobile,cust_nichen,cust_img
+		from t_cust
+		<where>
+			<if test="custMobile != null and custMobile.trim() != ''">
+				and	cust_mobile like concat('%',#{custMobile},'%')  		
+			</if>
+			<if test="custName != null and custName.trim() != ''">
+				and cust_name like concat('%',#{custName},'%') 				
+			</if>
+			<if test="custNichen != null and custNichen.trim != ''">
+				and cust_nichen like concat('%',#{custNichen},'%') 
+			</if>
+		</where>
+	</select>
+
+	
+	<!-- 根据手机号、密码查询进行登录 -->
+	<select id="selectByCusts" resultMap="CustMap" parameterType="Cust">
+		select cust_id,cust_name,cust_mobile,cust_nichen,cust_img
+		from t_cust
+		<where>
+			<if test="custMobile != null and custMobile.trim() != ''">
+				and	cust_mobile like concat('%',#{custMobile},'%')  		
+			</if>
+			<if test="custPwd != null and custPwd.trim() != ''">
+				and cust_pwd  like concat('%',#{custPwd},'%') 				
+			</if>
+		</where>
+	</select>
+	
+
+	
+	<!-- 客户端注册 -->
+	<insert id="insertByCust" parameterType="Cust">
+		insert into t_cust(cust_name,cust_mobile,cust_nichen,cust_img,cust_pwd)
+		values(#{custName},#{custMobile},#{custNichen},#{custImg},#{custPwd})
+	</insert>
+
+</mapper>

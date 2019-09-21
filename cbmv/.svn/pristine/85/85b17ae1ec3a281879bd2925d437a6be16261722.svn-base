@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>创蓝微讲堂——首页</title>
+		<!--引入页面的js  -->
+		<%@ include file="/comm/header.jsp" %>
+
+	</head>
+
+	<body>
+		<!--引入头部导航栏  -->
+		<%@ include file="/comm/nav.jsp" %>
+
+		<!--主内容区 begin-->
+		<div class="container-fluid">
+			<!--面包屑导航 begin-->
+			<ol class="breadcrumb">
+				<li>
+					<a href="#">首页</a>
+				</li>
+				<li>
+					<a href="#">用户管理</a>
+				</li>
+				<li class="active">新增</li>
+			</ol>
+			<!--面包屑导航 end-->
+			<!--功能模块区 begin-->
+			<div class="main">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row form-group-sm"><span class="col-sm-1">周期</span>
+							<div class="col-sm-3">
+								<select class="form-control">
+									<option>小时</option>
+									<option>日</option>
+									<option>周</option>
+									<option>月</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<dl>
+								<dt>50</dt>
+								<dd>注册人数</dd>
+							</dl>
+						</div>
+						<div class="col-sm-3">
+							<dl>
+								<dt>50</dt>
+								<dd>在线人数</dd>
+							</dl>
+						</div>
+						<div class="col-sm-3">
+							<dl>
+								<dt>50</dt>
+								<dd>播放数</dd>
+							</dl>
+						</div>
+						<div class="col-sm-3">
+							<dl>
+								<dt>50</dt>
+								<dd>点赞数</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--功能模块区 end-->
+		</div>
+		<!--主内容区 end-->
+	</body>
+
+</html>

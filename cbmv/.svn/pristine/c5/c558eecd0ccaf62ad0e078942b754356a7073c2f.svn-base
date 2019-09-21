@@ -1,0 +1,67 @@
+package com.creatorbluer.cbmv.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.creatorbluer.cbmv.domain.Collect;
+import com.creatorbluer.cbmv.mapper.CollectMapper;
+
+@Service
+public class CollectService {
+	@Autowired
+	CollectMapper mapper;
+	
+	/**
+	 * 查询所有
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Collect> selectByAll(Collect c)throws SQLException{
+		
+		return mapper.selectByAll(c);
+	}
+	
+	/**
+	 * 根据id查询
+	 * @param collectId
+	 * @return
+	 * @throws SQLException
+	 */
+	public Collect selectById(int collectId)throws SQLException{
+		return mapper.selectById(collectId);
+	}
+	
+	/**
+	 * 删除
+	 * @param collectId
+	 * @return
+	 * @throws SQLException
+	 */
+	public int delete(Integer[] collectId)throws SQLException{
+		return mapper.delete(collectId);
+	}
+	
+	/**
+	 * 新增
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
+	public int seav(Collect c)throws SQLException{
+		return mapper.seav(c);
+	}
+	
+	/**
+	 * 判断收藏
+	 * @param c
+	 * @return
+	 */
+	public Integer selectByCollect(Collect c) {
+		return mapper.selectByCollect(c);
+		
+	}
+}

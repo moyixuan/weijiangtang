@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.HistoryMapper">
+	<resultMap type="History" id="historyMap">
+		<!--主键  -->
+		<id column="history_id" property="historyId"/>
+		<!--非主键字段  -->
+		<result column="cust_id" property="custId"/>
+		<result column="video_id" property="video.videoId"/>
+		<result column="video_name" property="video.videoName"/>
+		<result column="video_teacher" property="video.videoTeacher"/>
+		<result column="video_description" property="video.videoDis"/>
+		<result column="video_img" property="video.videoImg"/>
+		<result column="history_id" property="historyId"/>
+	</resultMap>
+	
+	<!-- 查询 -->
+  <select id="selectByhistory" resultMap="historyMap" parameterType="Integer">
+		select h.video_id,video_name,video_teacher,video_description,video_img,history_id
+		FROM t_history h LEFT JOIN t_video v ON h.video_id = v.video_id
+		<where>
+			cust_id = #{value}
+		</where>
+		ORDER BY history_time desc
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insertByhistory" parameterType="History">
+		insert into t_history(cust_id,history_time,video_id)
+		values(#{custId},#{historyTime},#{video.videoId})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="delByhistory" parameterType="list">
+		delete from t_history 
+		<where>
+			history_id in 
+			<foreach collection="array" open="(" item="id" separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+	
+	<!-- 是否重复 -->
+	<select id="hischongfu" resultType="Integer" parameterType="History">
+		select count(*)
+		from t_history 
+		<where>
+			and cust_id = #{custId}
+			and video_id = #{video.videoId}
+		</where>
+	</select>
+		
+</mapper>

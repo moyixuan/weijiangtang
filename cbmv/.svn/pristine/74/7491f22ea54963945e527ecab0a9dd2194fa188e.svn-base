@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.CollectMapper">
+  <resultMap id="BaseResultMap" type="Collect">
+    <id column="collect_id" jdbcType="INTEGER" property="collectId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    collect_id, cust_id, video_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_collect
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_collect
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.creatorbluer.cbmv.domain.Collect">
+    insert into t_collect (collect_id, cust_id, video_id
+      )
+    values (#{collectId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.creatorbluer.cbmv.domain.Collect">
+    insert into t_collect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collectId != null">
+        collect_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="videoId != null">
+        video_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collectId != null">
+        #{collectId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.creatorbluer.cbmv.domain.Collect">
+    update t_collect
+    <set>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null">
+        video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.creatorbluer.cbmv.domain.Collect">
+    update t_collect
+    set cust_id = #{custId,jdbcType=INTEGER},
+      video_id = #{videoId,jdbcType=INTEGER}
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+.cb-data-list td span{
+	height : 50px;
+	width: 50px;
+	border-radius: 50%;
+	display: inline-block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size:cover;
+}
+ul{
+			padding: 0;
+		}
+		
+		li{
+			list-style: none;
+		}
+			
+			.glyphicon-chevron-left{
+				top: 10px; 
+				left: 15px;
+				position:absolute; 
+				z-index:2;	
+				filter:alpha(opacity=50); 
+				-moz-opacity:0.5; 
+				opacity:0.5;
+				color: white;
+				
+			}
+	        .videohide{
+	        	padding-left: 0px;
+	        	padding-right: 0px;
+	      
+	        	
+	        	
+	        }
+			.videoid{
+				
+				z-index:1;
+				width: 100%; 
+				height:200px ; 
+				object-fit:cover;
+			}
+			.videohide2{
+				position: absolute;
+				 top: 200px;
+				left:0;
+				right:0;
+				height: 100%;
+					width:auto; 
+				
+				
+			}
+			.nav{
+				display: flex;        
+				justify-content:space-between; 
+			}
+			.nav li  span{
+				
+				color: white;
+			} 
+			.nav li a{
+					color: white;
+				}
+			.videohide3{
+						
+						
+			}
+			.nav2{
+				display: flex;        
+				justify-content:space-between; 	
+			}
+			.nav2 li{
+				background-color: white;
+				border-top-right-radius: 5px; 
+				border-top-left-radius: 5px; 
+				border-bottom-right-radius:5px;
+				border-bottom-left-radius:5px;
+				width: 90px;
+				height: 20px;
+                color: gainsboro;
+                font-size: 10px;
+			}
+			.img-circle{
+				border-radius:50%;
+				 border: gainsboro;
+				 width: 30px;
+				 height: 30px;
+			}
+	.nav3 li dl span{
+				color: lightgrey;
+			}
+	.nav3 li  dt p	{
+		color: black;
+	}	
+			#teacher-name dt span{
+				display: inline-block;
+				height: 40px;
+				width: 200px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				padding-top: 15px;
+				
+			}
+			#teacher-name dt{
+					width: 400px;
+				 	white-space:nowrap;/* 不换行 */
+   					 overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+   					 text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) */
+           
+			}
+			#teacher-name dd{
+				height: 20px;
+				width: 80px;
+			}
+			.dzdiv{
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+			#dis{
+				overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+   				text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) */
+           		display: -webkit-box;
+           		-webkit-line-clamp: 4;
+				-webkit-box-orient: vertical;
+			}

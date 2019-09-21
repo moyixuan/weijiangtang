@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.VideoMapper">
+	<sql id="videoaql">
+		video_id,video_name,video_teacher,type_id,type_name,play_num,like_num
+		,collect_num,share_num,video_description,video_url,video_img,video_lunbo,video_state
+	</sql>
+	<resultMap type="Video" id="videoMap">
+		<!--主键  -->
+		<id column="video_id" property="videoId"/>
+		<!--非主键字段  -->
+		<result column="video_name" property="videoName"/>
+		<result column="video_teacher" property="videoTeacher"/>
+		<result column="type_id" property="type.typeId"/>
+		<result column="type_name" property="type.typeName"/>
+		<result column="play_num" property="playNum"/>
+		<result column="like_num" property="likeNum"/>
+		<result column="collect_num" property="collectNum"/>
+		<result column="share_num" property="shareName"/>
+		<result column="video_description" property="videoDis"/>
+		<result column="video_url" property="videoUrl"/>
+		<result column="video_img" property="videoImg"/>
+		<result column="video_lunbo" property="videoLunbo"/>
+		<result column="video_state" property="videoState"/>
+	</resultMap>
+	
+	<!-- 首页热门查询 -->
+	<select id="selectindexvideo" resultMap="videoMap" parameterType="Video">
+	select  
+	<include refid="videoaql">
+	</include>
+	from t_video
+	<where>
+	 or  play_num  &gt; 100
+
+	 or  like_num  &gt; 10
+	 
+	 and  video_state=1
+	</where>
+	</select>
+	<!-- 轮播图热门查询 -->
+	<select id="selectindexvideos" resultMap="videoMap" parameterType="Video">
+	select  
+	<include refid="videoaql">
+	</include>
+	from t_video
+	<where>
+	  and video_lunbo=1 
+	  
+	  and  video_state=1
+	</where>
+	</select>
+	
+	<!-- 查询状态为1的记录数 -->
+	
+	<select id="selectcount" resultType="int" parameterType="Video">
+	select  
+	 count(*)
+	from t_video
+	<where>
+	  and video_lunbo=1 
+	  
+	   and  video_state=1
+	</where>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 根据视频名称模糊查询 -->
+	<select id="videonamequery" resultMap="videoMap"  parameterType="Video">
+	select
+	<include refid="videoaql"> 
+	</include>
+	from t_video
+	<where>
+	<if test="videoName != null and videoName.trim() != ''">
+	and  video_name like concat ('%',#{videoName},'%') 
+	
+	and  video_state=1   
+	</if>
+	
+	</where>
+	</select>
+	
+	
+	
+	
+	
+
+	<!-- 后台查询 -->
+	<select id="selectByVideo" resultMap="videoMap" parameterType="Video">
+		select <include refid="videoaql" />
+		from t_video
+		<where>
+			<if test="type != null and type.typeId != null">
+				and type_id = #{type.typeId}
+			</if>
+			<if test="videoName != null and videoName.trim() != ''">
+				and video_name like concat("%",#{videoName},"%"); 
+			</if>
+			<if test="videoLunbo != null and videoLunbo.trim() !=''">
+				and video_lunbo = #{videoLunbo}
+			</if>
+			<if test="videoState != null and videoState.trim() !=''">
+				and video_state = #{videoState}
+			</if>
+			
+		</where>
+	</select>
+	
+	<!--删除  -->
+	<delete id="delectsByVideo" parameterType="list">
+		delete from t_video 
+		<where>
+			video_id in 
+			<foreach collection="array" open="(" item="id" separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+	
+	
+	<!-- 通过id查询 -->
+	<select id="selectByVideoId" parameterType="list"  resultMap="videoMap">
+		select <include refid="videoaql" />
+		from t_video
+		<where>
+			video_id in 
+			<foreach collection="array" open="(" item="id" separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</select>
+	
+	
+	<!-- 通过ID查询单条记录 -->
+	<select id="selectbyvideoid"  parameterType="int"   resultMap="videoMap" >
+	select
+	<include refid="videoaql" />
+	from t_video
+	<where>
+	video_id=#{videoId}
+	</where>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--新增  -->
+	<insert id="inserByVideo" parameterType="Video">
+		insert into t_video(video_name,video_teacher,type_id,type_name,video_description,video_url,video_img,play_num,like_num,collect_num)
+		values(#{videoName},#{videoTeacher},#{type.typeId},#{type.typeName},#{videoDis},#{videoUrl},#{videoImg},#{playNum},#{likeNum},#{collectNum})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateByVideo" parameterType="Video">
+		update t_video 
+		<set>
+			<if test="videoName != null">
+				video_name = #{videoName},
+			</if>
+			<if test="videoTeacher != null">
+				video_teacher = #{videoTeacher},
+			</if>
+			<if test="type != null and type.typeId != null">
+				type_id = #{type.typeId},
+			</if>
+			<if test="type != null and type.typeName != null">
+				type_name = #{type.typeName},
+			</if>
+			<if test="videoUrl != null">
+				video_url = #{videoUrl},
+			</if>
+			<if test="videoDis != null">
+				video_description = #{videoDis},
+			</if>
+			<if test="videoImg != null">
+				video_img = #{videoImg},
+			</if>
+			<if test="videoLunbo != null ">
+				video_lunbo = #{videoLunbo},
+			</if>
+			<if test="playNum != null">
+				play_num = #{playNum},
+			</if>
+			<if test="likeNum != null">
+				like_num = #{likeNum},
+			</if>
+			<if test="collectNum != null">
+				collect_num = #{collectNum},
+			</if> 
+			<if test="videoState != null">
+				video_state = #{videoState},
+			</if> 
+		</set>
+		<where>
+			video_id = #{videoId}
+		</where>
+	</update>
+	
+	<!-- 判断视频名字是否重复 -->
+	<select id="selectChongfu" resultType="Integer" parameterType="Video">
+		select count(*)
+		from t_video
+		<where>
+			<if test="videoName != null and videoName.trim() != ''">
+				and video_name = #{videoName}
+			</if>
+			<if test="videoId != null">
+				and video_id != #{videoId}
+			</if>
+			
+		</where>
+	</select>
+
+	
+	
+	<!-- 点赞新增 -->
+	<update id="addLikeNum" parameterType="int">
+		update t_video 
+		<set>
+			like_num = like_num + 1,
+		</set>
+		<where>
+			video_id = #{videoId}
+		</where>
+	</update>
+	
+	<!-- 点赞删除 -->
+	<update id="delLikeNum" parameterType="int">
+		update t_video
+		<set>
+			like_num = like_num - 1,
+		</set>
+		<where>
+			video_id = #{videoId}
+		</where>
+	</update>
+	
+	<!-- 收藏数增加 -->
+	<update id="addCollectNum" parameterType="int">
+		update t_video
+		<set>
+			collect_num = collect_num + 1,
+		</set>
+		<where>
+			video_id = #{videoId}
+		</where>
+	</update>
+	
+	<!-- 收藏数删除 -->
+	<update id="delCollectNum" parameterType="int">
+		update t_video
+		<set>
+			collect_num = collect_num - 1,
+		</set>
+		<where>
+			video_id = #{videoId}
+		</where>
+	</update>
+
+	
+	<!-- 查询播放数 -->
+	<select id="selectSumPlay" resultType="Integer" parameterType="Video">
+		select sum(play_num)
+		from t_video
+		<where>
+			<if test="videoName != null and videoName.trim() != ''">
+				and video_name = #{videoName}
+			</if>
+			<if test="videoId != null">
+				and video_id != #{videoId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询点赞数 -->
+	<select id="selectLikePlay" resultType="Integer" parameterType="Video">
+		select sum(like_num)
+		from t_video
+		<where>
+			<if test="videoName != null and videoName.trim() != ''">
+				and video_name = #{videoName}
+			</if>
+			<if test="videoId != null">
+				and video_id != #{videoId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询一个月里每一天的注册人数 -->
+	<select id="selectByDay" parameterType="String" resultType="Map">
+		SELECT COUNT(*) sum ,DATE_FORMAT(cust_time,'%Y-%m-%d') time
+		FROM t_cust
+		<where>
+			<if test="value != null">
+				 cust_time  BETWEEN #{value} AND   NOW()
+			</if>
+		</where>
+		GROUP BY DATE_FORMAT(cust_time,'%Y-%m-%d')
+		ORDER BY cust_time ASC
+	</select>
+</mapper>

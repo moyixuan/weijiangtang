@@ -1,0 +1,62 @@
+			.container {
+				height: 45px;
+				background-color: red;
+			}
+			
+			.nav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			
+			a {
+				text-decoration: none;
+				color: white;
+			}
+			
+			.col-lg-4 {
+				width: 230px;
+				text-align: left;
+				margin-top: 4px;
+			}
+			
+			.input-group-btn {
+				width: 50px;
+			}
+			
+			.input-group {
+				margin-left: -15px;
+			}
+			
+			.form-control {
+				margin-right: -30px;
+				outline: none;
+				border-radius: 0;
+			}
+			/*=======================*/
+			
+			.nr {
+				height: 300px;
+				padding-left: 15px;
+				padding-right: 15px;
+				margin-top: 5px;
+			}
+			
+			.ss {
+				font-size: 14px;
+			}
+			
+			.xx {
+				margin-top: 20px;
+			}
+			
+			.border {
+				padding: 4px 10px;
+				display: inline-block;
+				margin: 5px 5px;
+				max-width: 150px;
+				max-height: 30px;
+				overflow:hidden; 
+				text-overflow:ellipsis;
+				white-space:nowrap; 
+			}

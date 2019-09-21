@@ -1,0 +1,56 @@
+package com.creatorbluer.cbmv.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.creatorbluer.cbmv.domain.History;
+import com.creatorbluer.cbmv.mapper.HistoryMapper;
+
+@Service
+public class HistoryService {
+	@Autowired
+	HistoryMapper historymapper;
+	
+	/**
+	 * 查询
+	 * @param custId
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<History> selectByhistory(Integer custId) throws SQLException{
+		return historymapper.selectByhistory(custId);
+	}
+	
+	/**
+	 * 新增
+	 * @param h
+	 * @return
+	 * @throws SQLException
+	 */
+	public int insertByhistory(History h)throws SQLException{
+		return historymapper.insertByhistory(h);
+	}
+	
+	/**
+	 * 删除
+	 * @param historyId
+	 * @return
+	 * @throws SQLException
+	 */
+	public int delByhistory(Integer[] historyId)throws SQLException{
+		return historymapper.delByhistory(historyId);
+	}
+	
+	/**
+	 * 是否重复
+	 * @param h
+	 * @return
+	 * @throws SQLException
+	 */
+	public Integer hischongfu(History h)throws SQLException{
+		return historymapper.hischongfu(h);
+	}
+}

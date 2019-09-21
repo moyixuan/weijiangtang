@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/search.css" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/cbmv.js" ></script>
+		<script type="text/javascript" src="js/search.js" ></script>
+		<style>
+			img{
+		width: 100%;
+		height: 200px;
+	}
+	.videodomo{
+		position: absolute;
+		top:200px;
+	}
+			
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<ul class="nav">
+				<li class="nav-item sou">
+					<div class="col-lg-4">
+						<div class="input-group">
+							<span class="input-group-btn">
+						       <a class="nav-link" href="#">
+<<<<<<< .mine
+						        	<span class="glyphicon glyphicon-search seach" aria-hidden="true" ></span>
+=======
+						        	<span class="glyphicon glyphicon-search  opensearch" aria-hidden="true"></span>
+>>>>>>> .r98
+							</a>
+							</span>
+							<input type="text" class="form-control search" placeholder="请输入搜索内容">
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">取消</a>
+				</li>
+			</ul>
+		</div>
+
+		<!--导航条end-->
+		<div class="nr">
+			<div>
+				<span class="ss">热门搜索</span>
+			</div>
+			<div class="searchtype">
+				<span class="rounded border">SugularJS</span>
+				<span class="rounded border">mysql</span>
+				<span class="rounded border">ajax</span>
+				<span class="rounded border">php</span>
+				<span class="rounded border">javascript</span>
+				<span class="rounded border">python</span>
+				<span class="rounded border">c</span>
+				<span class="rounded border">android</span>
+			</div>
+		</div>
+		
+		<!--视频-->
+		<div  class="videodomo">
+		<div class="container-fluid video">
+        <a href="#" class="thumbnail">
+            <img src="img/tu.jpg"
+                 alt="通用的占位符缩略图"
+                  class="indeximg"
+                 >
+        </a>
+        <div class="caption">
+        	<dt>视频名称:<span>MySQL入门</span></dt>
+            <dd>播放数:<span class="glyphicon glyphicon-user" aria-hidden="true" ">532</span></dd>
+       
+    </div>
+    
+    </div>
+   </div>
+
+	</body>
+
+</html>

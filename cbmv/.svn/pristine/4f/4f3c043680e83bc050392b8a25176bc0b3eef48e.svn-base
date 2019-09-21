@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.LikeMapper">
+
+	<resultMap id="likeMap" type="like">
+		<id column="like_id" property="likeId"></id>
+		<result column="cust_id" property="custId"/>
+		<result column="video_id" property="videoId"/>
+	</resultMap>
+	
+	<!-- 点赞查询 -->
+	<select id="selectByLike" resultType="integer" parameterType="like">
+		select count(*)
+		from t_like
+		<where>
+			and cust_id=#{custId}
+			and video_id=#{videoId}
+		</where>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="seavByLike" useGeneratedKeys="true" keyProperty="likeId" parameterType="like">
+		insert into t_like(cust_id,video_id)
+		values(#{custId},#{videoId})
+	</insert>
+	
+	  <!-- 删除 -->
+  <delete id="delete" parameterType="like">
+ 	 delete from t_like 
+ 	 <where>
+ 	 	and cust_id=#{custId}
+ 	 	and video_id=#{videoId}
+ 	 </where>
+ 	 
+ 	 </delete>
+</mapper>

@@ -1,0 +1,29 @@
+package com.creatorbluer.cbmv.mapper;
+
+import java.util.List;
+
+import com.creatorbluer.cbmv.domain.Cust;
+
+public interface CustMapper {
+	/**
+	 * 查询
+	 * @return
+	 */
+	List<Cust> selectByCusts(Cust c); 
+	
+	List<Cust> selectByCust(Cust c); 
+	
+	/**
+	 * 客户端注册
+	 * @param c
+	 * @return
+	 */
+	int insertByCust(Cust c);
+	
+	/**
+	 * 根据手机号查询
+	 * @param mobile
+	 * @return
+	 */
+	int selectByMobile(String mobile);
+}

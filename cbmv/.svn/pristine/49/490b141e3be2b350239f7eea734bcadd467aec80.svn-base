@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.TypeMapper">
+	<!--定义查询中字段与对象属性的映射关系  -->
+	<resultMap type="Type" id="typeMap">
+		<!--主键  -->
+		<id column="type_id" property="typeId"/>
+		<!--非主键字段  -->
+		<result column="type_code" property="typeCode"/>
+		<result column="type_name" property="typeName"/>
+		<result column="type_description" property="typeDis"/>
+		<result column="type_status" property="status"/>
+	</resultMap>
+	
+	<!-- 查询 -->
+	<select id="selectByType" resultMap="typeMap" parameterType="Type">
+		select type_id,type_code,type_name,type_description,type_status
+		from t_type
+		<where>
+			<if test="typeName != null and typeName.trim() !=''">
+				type_name like concat('%',#{typeName},'%')
+			</if>
+			<if test="status != null and status.trim() != ''">
+				and type_status = #{status}
+			</if>
+			
+		</where>
+	</select>
+	
+	<!--删除  -->
+	<delete id="delectsByType" parameterType="list">
+		delete from t_type 
+		<where>
+			type_id in 
+			<foreach collection="array" open="(" item="id" separator="," close=")">
+				#{id}
+			</foreach>
+			
+		</where>
+	</delete>
+	
+	<!-- 通过id查询 -->
+	<select id="selectByTypeId" parameterType="Integer"  resultMap="typeMap">
+		select type_id,type_code,type_name,type_description,type_status
+		from t_type
+		<where>
+			type_id = #{value}
+		</where>
+	</select>
+	
+	<!--新增  -->
+	<insert id="inserByTypr" parameterType="Type">
+		insert into t_type(type_code,type_name,type_description,type_status)
+		values(#{typeCode},#{typeName},#{typeDis},#{status})
+	</insert>
+	
+	<!--修改  -->
+	<update id="updateByType" parameterType="Type">
+		update t_type
+		<set>
+			<if test="typeCode != null">
+				type_code = #{typeCode},
+			</if>
+			<if test="typeName != null">
+				type_name = #{typeName},
+			</if>
+			<if test="typeDis != null">
+				type_description = #{typeDis},
+			</if>
+			<if test="status != null">
+				type_status = #{status}
+			</if>
+		</set>
+		<where>
+			type_id = #{typeId}
+		</where>
+	</update>
+	
+	<!-- 是否重复 -->
+	<select id="selectChongfu" resultType="Integer" parameterType="Type">
+		select count(*)
+		from t_type
+		<where>
+			<if test="typeCode != null and typeCode.trim() != ''">
+				and type_code = #{typeCode}
+			</if>
+			<if test="typeName != null and typeName.trim() !=''">
+				and type_name = #{typeName}
+			</if>
+			<if test="typeId != null ">
+				and type_id != #{typeId}
+			</if>
+		</where>
+		
+	</select>
+</mapper>

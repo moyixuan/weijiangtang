@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/font.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/cbmv.js" ></script>
+		<script type="text/javascript" src="js/regist.js" ></script>
+		<style type="text/css">
+			.bg{
+				background-color: #e51c23;
+				color: #FFFFFF;
+				height: 45px;
+			}
+			.nav-t{
+				margin: 0 auto;
+				padding-top: 5px;
+			}
+			.nav-item h1{
+				font-size: 18px;
+			}
+			.rc{
+				text-align: center;
+				width: 104px;
+				height: 104px;
+				margin: 0 auto;
+				margin-top: 10px;
+				border: 1px solid black;
+				
+			}
+			.nav-item-a{
+				float: left;
+				list-style: none;
+				width: 20px;
+				height: 20px;
+				padding-top: 5px;
+				margin-left: -40px;
+			}
+			.nav-left{
+				position: absolute;
+				width: 20px;
+				height: 20px;
+			}
+			.img-wid{
+				text-align: center;
+				position: relative;
+			}
+			.ylan{
+				width: 100%;
+				height: 100%;
+			}
+			.file{
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$(".input-group-text").css("width","80px")
+				$(".mb-3").css("height","45px")
+				$(".form-control").css("height","45px")
+				$(".btn").css("background-color","#e51c23").css("height","45px").css("color","#FFFFFF")
+				$("a").css("text-decoration","none")
+			})
+		</script>
+	</head>
+	<body>
+		<!--头部导航-->
+		<nav class="navbar bg ">
+		  <!-- Links -->
+		<ul class="nav-left">
+			  	<li class="nav-item nav-item-a" >
+			  	<a href="login.html" style="color:#FFFFFF"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></a>
+			  	</li>
+		  </ul>
+		  <ul class="navbar-nav nav-t">
+		    <li class="nav-item ">
+		     	<h1>注册</h1>
+		    </li>
+		  </ul>
+		</nav>
+		<!--头部导航ending-->
+		 <form role="form" enctype="multipart/form-data" method="post" id="uploadForm">
+		<!--头像-->
+		<div class="container img-wid">
+  			<div class="rc">
+  				<img class="ylan" src="img/timg.jpg"/>
+  			</div>
+  			<input type="file" name="file" class="file" accept="image/*">
+		</div>
+		
+		<!--主内容-->
+		<div class="container mt-3">
+			 
+			    <div class="input-group mb-3 input-group-sm">
+			      <div class="input-group-prepend">
+			        <span class="input-group-text">用户名</span>
+			      </div>
+			      <input type="text" class="form-control custNichen" placeholder="昵称"  name="custNichen" >
+			    </div>
+			
+			    <div class="input-group mb-3 input-group-sm">
+			      <div class="input-group-prepend">
+			        <span class="input-group-text">手机号</span>
+			      </div>
+			      <input type="number" class="form-control custMobile" placeholder="请输入您的手机号"  name="custMobile">
+			    </div>
+			  
+			    <div class="input-group mb-3 input-group-sm">
+			      <div class="input-group-prepend">
+			        <span class="input-group-text">姓名</span>
+			      </div>
+			      <input type="text" class="form-control custName" placeholder="请输入姓名"  name="custName">
+			    </div>
+			
+			    <div class="input-group mb-3 input-group-sm">
+			      <div class="input-group-prepend">
+			        <span class="input-group-text">密码</span>
+			      </div>
+			      <input type="password" class="form-control custPwd" placeholder="请输入密码" name="custPwd">
+			    </div>
+			 
+			    <div class="input-group mb-3 input-group-sm">
+			      <div class="input-group-prepend">
+			        <span class="input-group-text">确认密码</span>
+			      </div>
+			      <input type="password" class="form-control aginepwd" placeholder="请确认密码" >
+			    </div>
+			
+		</div>
+		<div class="container">
+ 			<a href="#" ><button type="button" class="btn btn-default btn-block ajax-regist">完成</button></a>
+		</div>
+		</form>
+	</body>
+</html>

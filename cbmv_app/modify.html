@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/cbmv.js" ></script>
+		<script type="text/javascript" src="js/modify.js" ></script>
+		<style>
+			body{
+				background-color: #F0F0F0;
+			}
+			.head{
+				background-color: #e51c23;
+				height: 45px;
+				text-align: center;
+				color: white;
+			}
+			.head-txt{
+				font-size: 18px;
+				line-height: 45px;
+				
+			}
+			.head-sp{
+				font-size: 18px;
+				float:left;
+				line-height: 45px;
+			}
+			.modify{
+				margin-top: 20px;
+				
+			}
+			
+			.txk{
+				margin: 0 auto;
+				width: 104px;
+				height: 104px;
+				border: 1px solid black;
+			}
+			.tx{
+				width: 100%;
+				height: 100%;
+			}
+			.input-group-text{
+				background-color: white;
+				border-right-style:none;
+			}
+			.form-control{
+				border-left-style: none;
+			}
+			.btn-danger{
+				margin-top: 25px;
+			}
+			.loc{
+				padding-left: 28px;
+			}
+			.file{
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#user").on("click",function(){
+					location.href='data.html'
+				})
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="container-fluid head">
+			<span class="glyphicon glyphicon-menu-left head-sp" id="user"></span>
+			<span class="head-txt">修改</span>
+			
+		</div>
+		<form>
+		<div class="upload container-fluid modify">
+  			<div class="txk">
+  				<img class="tx" src="img/timg.jpg" />
+  				<input type="file" name="file" class="file" accept="image/jpg,image/png,image/PNG"/>
+  			</div>
+		</div> 
+		
+		<div class="container-fluid modify">
+			<div class="input-group mb-3">
+      			<div class="input-group-prepend">
+        			<span class="input-group-text">用户名：</span>
+      			</div>
+      			<input type="text" class="form-control nichen" placeholder="昵称" name="custNichen">
+      		</div>
+		</div>
+		
+		<div class="container-fluid modify">
+			<div class="input-group mb-3">
+      			<div class="input-group-prepend">
+        			<span class="input-group-text">手机号：</span>
+      			</div>
+      			<input type="text" class="form-control mobile" placeholder="请输入您的手机号" name="custMobile">
+      		</div>
+		</div>
+		
+		<div class="container-fluid modify">
+			<div class="input-group mb-3">
+      			<div class="input-group-prepend">
+        			<span class="input-group-text">姓名：</span>
+      			</div>
+      			<input type="text" class="form-control loc name" placeholder="真实姓名" name="custName">
+      		</div>
+		</div>
+		</form>
+		<div class="container">
+			<button type="button" class="btn btn-danger btn-block chage">修改</button>
+		</div>
+	</body>
+</html>

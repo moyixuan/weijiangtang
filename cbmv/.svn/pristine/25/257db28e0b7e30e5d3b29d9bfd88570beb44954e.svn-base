@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.VideoMapper">
+	<sql id="videoaql">
+		video_id,video_name,video_teacher,type_id,type_name,play_num,like_num,collect_num,share_num,video_description,video_url
+	</sql>
+	<resultMap type="Video" id="videoMap">
+		<!--主键  -->
+		<id column="video_id" property="videoId"/>
+		<!--非主键字段  -->
+		<result column="video_name" property="videoName"/>
+		<result column="video_teacher" property="videoTeacher"/>
+		<result column="type_id" property="type.typeId"/>
+		<result column="type_name" property="type.typeName"/>
+		<result column="play_num" property="playNum"/>
+		<result column="like_num" property="likeNum"/>
+		<result column="collect_num" property="collectNum"/>
+		<result column="share_num" property="shareName"/>
+		<result column="video_description" property="videoDis"/>
+		<result column="video_url" property="videoUrl"/>
+	</resultMap>
+	
+	<!-- 首页热门查询 -->
+	<select id="selectindexvideo" resultMap="videoMap" parameterType="Video">
+	select  
+	<include refid="videoaql">
+	</include>
+	from t_video
+	<where>
+
+	 and  play_num  &gt; 100
+
+	 and  like_num  &gt; 10
+	
+	 
+	 
+	</where>
+	</select>
+	
+	
+	
+
+	
+	
+	
+	<!-- 查询 -->
+	<select id="selectByVideo" resultMap="videoMap" parameterType="Video">
+		select <include refid="videoaql" />
+		from t_video
+		<where>
+			<if test="type != null and type.typeId != null">
+				and type_id = #{type.typeId}
+			</if>
+			<if test="videoName != null and videoName.trim() != ''">
+				and video_name like concat("%",#{videoName},"%"); 
+			</if>
+		</where>
+	</select>
+	
+	<!--删除  -->
+	<delete id="delectsByVideo" parameterType="list">
+		delete from t_video 
+		<where>
+			video_id in 
+			<foreach collection="array" open="(" item="id" separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+	
+	
+	<!-- 通过id查询 -->
+	<select id="selectByVideoId" parameterType="list"  resultMap="videoMap">
+		select <include refid="videoaql" />
+		from t_video
+		<where>
+			video_id in 
+			<foreach collection="array" open="(" item="id" separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</select>
+	
+	<!--新增  -->
+	<insert id="inserByVideo" parameterType="Video">
+		insert into t_video(video_name,video_teacher,type_id,type_name,video_description,video_url)
+		values(#{videoName},#{videoTeacher},#{type.typeId},#{type.typeName},#{videoDis},#{videoUrl})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateByVideo" parameterType="Video">
+		update t_video 
+		<set>
+			<if test="videoName != null">
+				video_name = #{videoName},
+			</if>
+			<if test="videoTeacher != null">
+				video_teacher = #{videoTeacher},
+			</if>
+			<if test="type != null and type.typeId != null">
+				type_id = #{type.typeId},
+			</if>
+			<if test="type != null and type.typeName != null">
+				type_name = #{type.typeName},
+			</if>
+			<if test="videoUrl != null">
+				video_url = #{videoUrl},
+			</if>
+			<if test="videoDis != null">
+				video_description = #{videoDis},
+			</if>
+		</set>
+		<where>
+			video_id = #{videoId}
+		</where>
+	</update>
+	
+	<!-- 判断视频名字是否重复 -->
+	<select id="selectChongfu" resultType="Integer" parameterType="Video">
+		select count(*)
+		from t_video
+		<where>
+			<if test="videoName != null and videoName.trim() != ''">
+				and video_name = #{videoName}
+			</if>
+			<if test="videoId != null">
+				and video_id != #{videoId}
+			</if>
+			
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creatorbluer.cbmv.mapper.CollectMapper">
+
+  <!-- 定义查询中字段与对象属性的映射关系 -->
+  <resultMap id="collectMap" type="Collect">
+    <id column="collect_id" jdbcType="INTEGER" property="collectId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="video_id" jdbcType="INTEGER" property="video.videoId" />
+    <result column="video_name" property="video.videoName"/>
+    <result column="video_img" property="video.videoImg"/>
+    <result column="video_description" property="video.videoDis"/>
+  </resultMap>
+  
+  <!-- 查询所有 -->
+  <select id="selectByAll" resultMap="collectMap">
+  		SELECT c.collect_id,cust_id, c.video_id,video_name,video_teacher,type_id,type_name,play_num,like_num
+  		,collect_num,share_num,video_img,video_description
+		FROM t_collect c   LEFT JOIN t_video v ON v.video_id = c.video_id 
+		WHERE c.cust_id = 3
+  </select>
+  
+  <!-- 根据id查询 -->
+  <select id="selectById" resultMap="collectMap" parameterType="int">
+  	select collect_id,cust_id,video_id
+  	<where>
+  		collect_id=#{value}
+  	</where>
+  </select>
+  
+  <!-- 新增 -->
+  <insert id="seav" useGeneratedKeys="true" keyProperty="collectId" parameterType="Collect">
+  		insert into t_collect(cust_id,video_id)
+  		values(#custId),(#videoId)
+  </insert>
+  
+  <!-- 删除 -->
+  <delete id="delete" parameterType="list">
+  delete from t_collect where collect_id in
+  <foreach collection="array" open="(" item="id" separator="," close=")">
+  	#{id}
+  </foreach>
+ 
+  </delete>
+  
+</mapper>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/video.css" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<title></title>
+		<script>
+			$(function() {
+				$(".vdiv").on("click", function() {
+
+					if($(".dh").css("display") == "none") {
+						$(".dh").css("display", "inherit")
+					} else {
+						$(".dh").css("display", "none")
+					}
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+
+		<div class="container dh">
+			<ul class="nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<span class="glyphicon glyphicon-menu-left back" aria-hidden="true"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--导航end-->
+		<div class="container vdiv">
+			<video class="video" controls poster="img/课程图片.jpg" >
+				
+			</video>
+		</div>
+		<div class="bj">
+		<!--视频end-->
+		<ul class="list-group">
+			<li class="list-group-item">CSS网站布局</li>
+			<li class="list-group-item teacher">主讲教师：XXX</li>
+		</ul>
+		<!--名称end-->
+		
+		<div class="container sifx">
+			<ul class="nav fx">
+				<li class="nav-item ">
+					<a class="nav-link" href="#">
+						<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span><span>124</span>
+					</a>
+
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<span class="
+glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><span>124</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<span class="
+glyphicon glyphicon-heart" aria-hidden="true"></span><span>124</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<span class="
+glyphicon glyphicon-share" aria-hidden="true"></span><span>124</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--点赞 分享 end-->
+		<div class="container">
+			<ul class="nav zhfs">
+				<li class="nav-item zp">
+					<span>综合评价</span>
+				</li>
+				<li class="nav-item fs">
+					<span>10.00</span>
+				</li>
+			</ul>
+			<div class="bhh">
+				<span class="rounded border">内容实用  10.00</span>
+				<span class="rounded border">通俗易懂  10.00</span>
+				<span class="rounded border">通俗易懂  10.00</span>
+			</div>
+			
+		</div>
+		<div class="container dp">
+			<div>
+				<ul class="nav mctx">
+					<li class="nav-item ">
+						<span><div class="tx" ></div></span>
+					</li>
+					<li class="nav-item ">
+						<span><span>XXXX</span></span>
+					</li>
+					<li class="nav-item ">
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="weben">HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</div>
+		</div>
+		<div class="container dp">
+			<div>
+				<ul class="nav mctx">
+					<li class="nav-item ">
+						<span><div class="tx" ></div></span>
+					</li>
+					<li class="nav-item ">
+						<span><span>XXXX</span></span>
+					</li>
+					<li class="nav-item ">
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="weben">HTML 标签原本被设计为用于定义文档内容。通过使用 这样的标签，HTML 的初衷是表达“这是标题”、“这是段落”、“这是表格”之类的信息。同时文档布局由浏览器</div>
+		</div>
+	</div>
+	</body>
+
+</html>

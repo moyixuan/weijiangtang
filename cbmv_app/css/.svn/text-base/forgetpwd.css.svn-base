@@ -1,0 +1,61 @@
+.container {
+	height: 45px;
+	background-color: #E51C23;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+.change {
+	font-size: 18px;
+	margin: 0 90px;
+	color: white;
+	line-height: 45px;
+}
+
+.back {
+	top: 6px;
+}
+
+.nr {
+	margin-top: 20px;
+	height: 300px;
+	text-align: center;
+}
+
+
+/*===========*/
+
+.mb-3 {
+	height: 40px;
+	background-color: gainsboro;
+	width: 360px;
+	margin: 0 auto;
+}
+
+.input-group-text {
+	display: block;
+	width: 90px;
+	text-align: right;
+	background-color: transparent;
+}
+
+.form-control {
+	height: 100%;
+}
+
+.btn-danger {
+	background-color: #E51C23;
+	width: 360px;
+	height: 45px;
+	font-size: 16px;
+}
+
+input::-webkit-input-placeholder {
+	/* placeholder颜色  */
+	color: red;
+	/* placeholder字体大小  */
+	font-size: 14px;
+}

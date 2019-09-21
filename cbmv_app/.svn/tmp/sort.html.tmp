@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/font.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/cbmv.js" ></script>
+		<script type="text/javascript" src="js/sort.js" ></script>
+		<script type="text/javascript">
+			$(function() {
+				var back = $(".back");
+				back.click(function() {
+					window.location.href = "index.html";
+
+				})
+
+			})
+		</script>
+
+		<style type="text/css">
+			a,
+			a:hover {
+				text-decoration: none;
+				color: inherit;
+			}
+			
+			li,
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.bg {
+				background-color: #E51C23;
+			}
+			
+			.tx {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+			}
+			
+			.nav {
+				height: 45px;
+				color: white;
+				width: 100%;
+			}
+			
+			.back {
+				top: 0px;
+				margin:5px 0;
+			}
+			
+			.ss {
+				padding-right: 0;
+				padding-left: 0;
+			}
+			
+			.up {
+				line-height: 30px;
+				text-decoration: none;
+				list-style: none;
+				padding-left: 0;
+			}
+			
+			a:link {}
+			
+			.nav-d {
+				margin-left: 38px;
+			}
+			/*========头部搜索样式end==========*/
+			/*导航*/
+			
+			.bkgc a {
+				display: inline-block;
+				min-width: 60px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				white-space: nowrap;
+				text-align: center;
+				margin: 2px;
+				background-color: #F47878;
+				border-radius:20px;
+			}
+			/*内容*/
+			
+			.t-text {
+				width: 190px;
+				padding: 0 10px;
+				margin: 0 10px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			
+			.nav {
+				flex-wrap: nowrap;
+			}
+			
+			.bkgc {
+				width: 100%;
+				overflow-x: scroll;
+				overflow-y: hidden;
+				line-height: 40px;
+			}
+			.t-name{
+				background-color:#F24747;
+				text-align:center;
+				color: white;
+				border-radius:5px;
+				line-height:60px;
+				font-size: 28px;
+			}
+			.t-name img{
+				width: 150px;
+				height: 120px;
+			}
+			.t-text-a{
+				width: 100%;
+				height: 60px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				font-size: 20px;
+			}
+			.list-group li{
+				padding: 5px;
+			}
+			.list-group-item{
+				display: flex;
+				border: 0;
+			}
+			.nav-li{
+				list-style:none;
+				color: black;
+			}
+			.form-control{
+				margin-top: 3px;
+			}
+			.js li{
+				white-space: nowrap;
+				width: 100px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部搜索栏begin-->
+		<div class="container-fluid bg nav">
+			<ul class="nav row">
+				<li class="nav-item col-2">
+					<a class="nav-link" href="index.html">
+						<span class="glyphicon glyphicon-menu-left back  back" aria-hidden="true"></span>
+					</a>
+				</li>
+				<li class="nav-item  col-9">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="请输入视频名称" name="videoName">
+					</div>
+					<!-- /input-group -->
+				</li>
+				<li class="nav-item col-1 ss">
+					<a class="nav-link up each" href="#">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--头部搜索栏end-->
+
+		<!--导航栏-->
+		<div class="container">
+			<ul class="nav nav-pills  bkgc">
+				<li class="nav-item">
+					<a class="" href="#" data-typeid = "">全部</a>
+				</li>
+				<li class="nav-item">
+					<a class="" href="#">前段开发</a>
+				</li>
+				<li class="nav-item">
+					<a class="" href="#">后端开发</a>
+				</li>
+				<li class="nav-item">
+					<a class="" href="#">移动开发</a>
+				</li>
+			</ul>
+		</div>
+
+		<!--导航栏end-->
+
+		<!--主内容-->
+		<div class="container">
+
+			<ul class="list-group ">
+				<li class="list-group-item">
+					<div class="t-name">
+						Java核心技术
+					</div>
+
+					<div class="t-text">
+						<div class="t-text-a">
+							文本文本文本文本文本
+						</div>
+						<div class="t-text-b">
+							<ul class="js" style="display: flex;justify-content: space-between;">
+								<li>
+									<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+									<span>讲师</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									<span>1056</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="t-name" style="background-color: #138496;">
+						Java核心技术
+					</div>
+
+					<div class="t-text">
+						<div class="t-text-a">
+							文本文本文本文本文本
+						</div>
+						<div class="t-text-b">
+							<ul style="display: flex;justify-content: space-between;">
+								<li>
+									<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+									<span>讲师</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									<span>1056</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="t-name">
+						Java核心技术
+					</div>
+
+					<div class="t-text">
+						<div class="t-text-a">
+							文本文本文本文本文本
+						</div>
+						<div class="t-text-b">
+							<ul style="display: flex;justify-content: space-between;">
+								<li>
+									<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+									<span>讲师</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									<span>1056</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="t-name">
+						Java核心技术
+					</div>
+
+					<div class="t-text">
+						<div class="t-text-a">
+							文本文本文本文本文本
+						</div>
+						<div class="t-text-b">
+							<ul style="display: flex;justify-content: space-between;">
+								<li>
+									<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+									<span>讲师</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									<span>1056</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="t-name">
+						Java核心技术
+					</div>
+
+					<div class="t-text">
+						<div class="t-text-a">
+							文本文本文本文本文本
+						</div>
+						<div class="t-text-b">
+							<ul style="display: flex;justify-content: space-between;">
+								<li>
+									<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+									<span>讲师</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									<span>1056</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="t-name">
+						Java核心技术
+					</div>
+
+					<div class="t-text">
+						<div class="t-text-a">
+							文本文本文本文本文本
+						</div>
+						<div class="t-text-b">
+							<ul style="display: flex;justify-content: space-between;">
+								<li>
+									<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+									<span>讲师</span>
+								</li>
+								<li>
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									<span>1056</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+
+</html>

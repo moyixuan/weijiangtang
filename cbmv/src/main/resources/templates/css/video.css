@@ -1,0 +1,32 @@
+.spmc {
+	width: 450px;
+}
+input[type=file]{
+	display: none;
+}
+.xssp{
+	width: 104px;
+	height: 104px;
+	border:  1px solid #ccc; 
+	text-align: center;
+	line-height: 104px;
+	color: #ccc;
+}
+.xsfm{
+	width: 104px;
+	height: 104px;
+	border:  1px solid #ccc; 
+	text-align: center;
+	line-height: 104px;
+	color: #ccc;
+}
+.sptu{
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.fmtu{
+	width: 100%;
+	height: 100%;
+	display: none;
+}

@@ -1,0 +1,92 @@
+package com.creatorbluer.cbmv.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class History implements Serializable {
+    private Integer historyId;
+
+    private Integer custId;
+
+    private Date historyTime;
+
+    private Integer videoId;
+
+    private static final long serialVersionUID = 1L;
+
+    public Integer getHistoryId() {
+        return historyId;
+    }
+
+    public void setHistoryId(Integer historyId) {
+        this.historyId = historyId;
+    }
+
+    public Integer getCustId() {
+        return custId;
+    }
+
+    public void setCustId(Integer custId) {
+        this.custId = custId;
+    }
+
+    public Date getHistoryTime() {
+        return historyTime;
+    }
+
+    public void setHistoryTime(Date historyTime) {
+        this.historyTime = historyTime;
+    }
+
+    public Integer getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(Integer videoId) {
+        this.videoId = videoId;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        History other = (History) that;
+        return (this.getHistoryId() == null ? other.getHistoryId() == null : this.getHistoryId().equals(other.getHistoryId()))
+            && (this.getCustId() == null ? other.getCustId() == null : this.getCustId().equals(other.getCustId()))
+            && (this.getHistoryTime() == null ? other.getHistoryTime() == null : this.getHistoryTime().equals(other.getHistoryTime()))
+            && (this.getVideoId() == null ? other.getVideoId() == null : this.getVideoId().equals(other.getVideoId()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getHistoryId() == null) ? 0 : getHistoryId().hashCode());
+        result = prime * result + ((getCustId() == null) ? 0 : getCustId().hashCode());
+        result = prime * result + ((getHistoryTime() == null) ? 0 : getHistoryTime().hashCode());
+        result = prime * result + ((getVideoId() == null) ? 0 : getVideoId().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", historyId=").append(historyId);
+        sb.append(", custId=").append(custId);
+        sb.append(", historyTime=").append(historyTime);
+        sb.append(", videoId=").append(videoId);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}

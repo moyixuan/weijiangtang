@@ -1,0 +1,113 @@
+package com.creatorbluer.cbmv.controller;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.creatorbluer.cbmv.comm.Result;
+import com.creatorbluer.cbmv.domain.History;
+import com.creatorbluer.cbmv.service.HistoryService;
+
+@RestController
+@RequestMapping("/front")
+public class HistoryAjaxController {
+	@Autowired
+	HistoryService historyservice;
+	
+	/**
+	 * 查询
+	 * @param custId
+	 * @return
+	 */
+	@RequestMapping("/history_query")
+	private String historyselect(Integer custId) {
+		Result r = Result.Ok();
+		try {
+			List<History> list = historyservice.selectByhistory(custId);
+			r.setData(list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r = Result.ERROR();
+			r.setMsg("失败");
+			e.printStackTrace();
+		}
+		return r.toString();
+	}
+	
+	/**
+	 * 删除
+	 * @param historyId
+	 * @return
+	 */
+	@RequestMapping("/history_del")
+	private String historydel(Integer[] historyId) {
+		Result r = Result.Ok();
+		try {
+			int count = historyservice.delByhistory(historyId);
+			if(count>0) {
+				r.setMsg("删除成功");
+			}else {
+				r = Result.ERROR();
+				r.setMsg("删除失败");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r = Result.ERROR();
+			r.setMsg("删除失败");
+			e.printStackTrace();
+		}
+		return r.toString();
+	}
+	
+	/**
+	 * 添加记录
+	 * @param h
+	 * @return
+	 */
+	@RequestMapping("/history_add")
+	private String historyadd(History h) {
+		//验证是否存在,存在就要删除
+		Result r = Result.Ok();
+		try {
+			Integer historyId = historyservice.hischongfu(h);
+			if(historyId != null) {
+				Integer[] a = {historyId};
+				Integer count = historyservice.delByhistory(a);
+				if(count>0) {
+					System.out.println("删除成功");
+				}else {
+					System.out.println("删除失败");
+				}
+			}
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			 try {
+				h.setHistoryTime(sdf.parse(sdf.format(new Date())));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int a = historyservice.insertByhistory(h);
+			if (a > 0) {
+				r.setMsg("成功");
+			}else {
+				r = Result.ERROR();
+				r.setMsg("失败");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			r = Result.ERROR();
+			r.setMsg("错误");
+			e.printStackTrace();
+		}
+		return r.toString();
+		
+	}
+	
+}
