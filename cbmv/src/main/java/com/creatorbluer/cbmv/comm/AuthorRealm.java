@@ -58,6 +58,10 @@ public class AuthorRealm extends AuthorizingRealm {
 				SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserId(),user.getPwd(),user.getName());
 				ru.setCacheHash("loginUsers", user.getUserId().toString(), new JSONObject(user).toString());
 				return info;
+
+
+
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
